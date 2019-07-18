@@ -17,12 +17,12 @@ class HTTPServer:
         self.sockfd.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
         self.sockfd.bind(self.address)
         self.sockfd.listen(3)
-        print('监听', self.port)
+        print('listen..from', self.port)
 
     def serve_forever(self):
         while True:
             c,addr = self.sockfd.accept()
-            print('欢迎',addr)
+            print('hello',addr)
             gevent.spawn(self.func01,c)
 
     def func01(self,c):
@@ -39,26 +39,22 @@ class HTTPServer:
 
     def get_html(self,c,info):
         if info == '/':
-            # 请求主页
             filename = self.dir + "/index.html"
         else:
             filename = self.dir + info
         try:
             fd = open(filename)
         except Exception:
-            # 网页不存在
             response = "HTTP/1.1 404 Not Found\r\n"
             response += 'Content-Type:text/html\r\n'
             response += '\r\n'
             response += '<h1>Sorry....</h1>'
         else:
-            # 网页存在
             response = "HTTP/1.1 200 OK\r\n"
             response += 'Content-Type:text/html\r\n'
             response += '\r\n'
             response += fd.read()
         finally:
-            # 将响应发送给浏览器
             c.send(response.encode())
 
     def get_data(self, c, info):
