@@ -5,7 +5,7 @@ from socket import *
 
 
 class HTTPServer:
-    def __init__(self,host = '39.100.143.85',port = 8888,dir = None):
+    def __init__(self,host = '39.100.143.85',port = 11,dir = None):
         self.host = host
         self.port = port
         self.dir =dir
