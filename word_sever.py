@@ -6,7 +6,7 @@ from socket import *
 
 
 class TCP_Sever:
-    def __init__(self, host='0.0.0.0', port=8888):
+    def __init__(self, host='0.0.0.0', port=8880):
         self.host = host
         self.port = port
         self.address = (host, port)

@@ -1,5 +1,4 @@
 import pymysql
-# 链接数据库
 
 class Database:
     def __init__(self,host = 'localhost',
@@ -27,14 +26,12 @@ class Database:
     def close(self):
         self.db.close()
 
-    # 创建游标
     def create_cursor(self):
         self.cur = self.db.cursor()
 
     def select(self,data):
         sql = "select password from user where name =%s"
         self.cur.execute(sql,data[1])
-        # 获取一个查询结果
         one_row = self.cur.fetchall()
         return one_row
 
