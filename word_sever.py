@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import gevent
 from word_dict import *
 from gevent import monkey
